@@ -97,7 +97,11 @@ export default {
 }
 
 .hide {
-    display: none;
+    z-index: -999;
+    bottom: -1500px;
+    right: -1500px;
+    transform: translate(-542px, 518px);
+    transition: all 0.5s ease;
     opacity: 0;
 }
 </style>
