@@ -8,33 +8,44 @@ export default createStore({
         active: false,
         src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
         open: false,
-        id: Date.now()*Math.random(),
+        id: Date.now() * Math.random(),
       },
       {
         title: "tetris.exe",
         active: false,
         src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
         open: false,
-        id: Date.now()*Math.random(),
+        id: Date.now() * Math.random(),
       },
       {
         title: "Something.config",
         active: false,
         src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
         open: false,
-        id: Date.now()*Math.random(),
+        id: Date.now() * Math.random(),
       },
       {
         title: "Something.config",
         active: false,
         src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
         open: false,
-        id: Date.now()*Math.random(),
+        id: Date.now() * Math.random(),
       },
     ],
   },
   getters: {},
-  mutations: {},
-  actions: {},
+  mutations: {
+    setFilesUnactive(state) {
+      state.files = state.files
+    },
+  },
+  actions: {
+    setFilesUnactive({ commit, state }) {
+     state.files.forEach((item) => {
+        item.active = false;
+      });
+      commit("setFilesUnactive");
+    },
+  },
   modules: {},
 });
