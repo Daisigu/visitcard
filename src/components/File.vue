@@ -1,5 +1,5 @@
 <template>
-    <div class="file-container" >
+    <div class="file-container">
         <div class="file-wrapper">
             <div class="file" :class="{ 'active': file.active }" :style="'background-image: url(' + file.src + ');'">
             </div>
@@ -7,11 +7,7 @@
                 <slot></slot>
             </div>
         </div>
-
         <OpenFile :file="file"></OpenFile>
-
-
-
     </div>
 </template>
 
@@ -26,7 +22,7 @@ export default {
         file: Object,
     },
     components: { OpenFile },
-   
+
 }
 </script>
 

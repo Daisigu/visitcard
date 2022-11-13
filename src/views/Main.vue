@@ -4,6 +4,7 @@
             <File v-for="file, key in files" :file="file" @dblclick="openFile(key, file.id)" @click="fileActive(key)">
                 {{ file.title }}
             </File>
+           
         </div>
     </div>
 </template>

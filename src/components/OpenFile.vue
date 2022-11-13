@@ -19,84 +19,92 @@
             </div>
         </div>
         <div class="folder-body">
-
+            
         </div>
     </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-
+import { mapActions, mapState } from 'vuex';
 export default {
     props: {
         file: Object,
     },
+
     data() {
         return {
             dragUp: false,
             fullSize: false,
-        }
+            sfile: {
+                title: "Something.config",
+                active: false,
+                src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
+                open: false,
+                id: Date.now() * Math.random(),
+            },
+        };
     },
     methods: {
         ...mapActions([
-            'setFilesUnactive'
+            "setFilesUnactive"
         ]),
         drag() {
-            this.dragUp = true
+            this.dragUp = true;
         },
         draging(key) {
             if (this.dragUp) {
                 let doc = document.getElementById(key);
                 doc.style.position = "absolute";
-                doc.style.left = event.clientX - 250 + 'px';
-                doc.style.width = "500px"
-                doc.style.height = "500px"
-                doc.style.top = event.clientY - 20 + 'px';
-                doc.style.transition = 'none'
-                this.fullSize = false
-                let folders = document.getElementsByClassName('folder')
+                doc.style.left = event.clientX - 250 + "px";
+                doc.style.width = "500px";
+                doc.style.height = "500px";
+                doc.style.top = event.clientY - 20 + "px";
+                doc.style.transition = "none";
+                this.fullSize = false;
+                let folders = document.getElementsByClassName("folder");
                 for (let item of folders) {
-                    item.style.zIndex = 1
+                    item.style.zIndex = 1;
                 }
-                doc.style.zIndex = 999
+                doc.style.zIndex = 999;
             }
         },
         drop() {
-            this.dragUp = false
-            let folders = document.getElementsByClassName('folder')
+            this.dragUp = false;
+            let folders = document.getElementsByClassName("folder");
             for (let item of folders) {
-                item.style.transition = "all 0.3s ease"
+                item.style.transition = "all 0.3s ease";
             }
         },
         upZindex(fileId) {
             let doc = document.getElementById(fileId);
-            let folders = document.getElementsByClassName('folder')
+            let folders = document.getElementsByClassName("folder");
             for (let item of folders) {
-                item.style.zIndex = 1
+                item.style.zIndex = 1;
             }
-            doc.style.zIndex = 999
+            doc.style.zIndex = 999;
         },
         fullSizeWindow(fileId) {
             let doc = document.getElementById(fileId);
-            doc.style.width = "100vw"
-            doc.style.height = "100vh"
-            this.fullSize = true
-            doc.style.left = '0px'
-            doc.style.top = '0px'
+            doc.style.width = "100vw";
+            doc.style.height = "100vh";
+            this.fullSize = true;
+            doc.style.left = "0px";
+            doc.style.top = "0px";
         },
         smallSizeWindow(fileId) {
             let doc = document.getElementById(fileId);
-            doc.style.width = "500px"
-            doc.style.height = "500px"
-            doc.style.left = '200px'
-            doc.style.top = '200px'
-            this.fullSize = false
-
+            doc.style.width = "500px";
+            doc.style.height = "500px";
+            doc.style.left = "200px";
+            doc.style.top = "200px";
+            this.fullSize = false;
         }
     },
     computed: {
-
-    }
+        ...mapState([
+            "files"
+        ])
+    },
 }
 </script>
 
