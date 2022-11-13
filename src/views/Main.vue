@@ -1,8 +1,7 @@
 <template>
     <div class="main">
         <div class="files-container" @click.self="setFilesUnactive()">
-            <File v-for="file, key in files" :file="file" :open="file.open" :img="file.src" :fileActive="file.active"
-                @dblclick="openFile(key, file.id)" @click="fileActive(key)">
+            <File v-for="file, key in files" :file="file" @dblclick="openFile(key, file.id)" @click="fileActive(key)">
                 {{ file.title }}
             </File>
         </div>
@@ -14,11 +13,7 @@ import File from '@/components/File.vue';
 import { mapActions, mapState } from 'vuex';
 
 export default {
-    data() {
-        return {
 
-        }
-    },
     components: { File },
     methods: {
         ...mapActions([
