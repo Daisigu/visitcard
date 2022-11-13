@@ -1,34 +1,43 @@
 <template>
-    <div class="file-wrapper">
-        <div class="file" :class="{ 'active': fileActive }"
-            :style="'background: url('+img+');'">
+    <div class="file-container">
+        <div class="file-wrapper">
+            <div class="file" :class="{ 'active': fileActive }" :style="'background-image: url('+img+');'">
+            </div>
+            <div class="file-label">
+                <slot></slot>
+            </div>
+        </div>
 
-        </div>
-        <div class="file-label">
-            <slot></slot>
-        </div>
+        <OpenFile :open="open"></OpenFile>
+
+
+
     </div>
 </template>
 
 <script>
+import OpenFile from './OpenFile.vue';
+
 export default {
     data() {
-        return {
-
-        }
+        return {};
     },
     props: {
         fileActive: Boolean,
         img: String,
-    }
+        open: Boolean,
+    },
+    components: { OpenFile }
 }
 </script>
 
+
 <style scoped>
+.file-container{
+    width: 80px;
+}
 .file {
     cursor: pointer;
-    background: blue;
-
     background-position: 50%;
     background-position-y: 30%;
     background-repeat: no-repeat;

@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <div class="files-container">
-            <File v-for="file, key in files" :img="file.src" :fileActive="file.active" @click="fileActive(key)">
+            <File v-for="file, key in files" :open="file.open" :img="file.src" :fileActive="file.active" @click="fileActive(key)">
                 {{ file.title }}
             </File>
         </div>
@@ -18,17 +18,26 @@ export default {
                 {
                     title: 'My project',
                     active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg'
+                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
+                    open: false,
                 },
                 {
                     title: 'tetris.exe',
                     active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg'
+                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
+                    open: false,
                 },
                 {
                     title: 'Something.config',
                     active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg'
+                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
+                    open: false,
+                },
+                {
+                    title: 'Something.config',
+                    active: false,
+                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
+                    open: false,
                 },
 
             ]
@@ -39,8 +48,10 @@ export default {
         fileActive(key) {
             this.files.forEach((item) => {
                 item.active = false
+                item.open = false
             })
             this.files[key].active = true
+            this.files[key].open = true
 
         }
     }
@@ -50,11 +61,12 @@ export default {
 <style scoped>
 .main {
     width: 100%;
-    height: 100vh;
 }
 
 .files-container {
     display: flex;
+    margin-top: 5rem;
+    margin-left: 5rem;
     flex-direction: column;
 }
 </style>

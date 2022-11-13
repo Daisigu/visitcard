@@ -25,7 +25,6 @@ export default {
 body {
   background: rgb(255, 221, 29);
   width: 100%;
-  height: 100vh;
 }
 
 #app {
