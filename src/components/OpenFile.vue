@@ -1,11 +1,21 @@
 <template>
     <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)">
-        <div class="folder-header" @mousedown.prevent="drag(file.id)" @mousemove="draging(file.id)" @mouseup="drop()">
+        <div class="folder-header" @mousedown.prevent="drag(file.id)" @mousemove="draging(file.id)" @mouseup="drop()"
+            @dblclick="fullSizeWindow(file.id)">
             <div class="filder-header__title">
                 <span>{{ file.title }}</span>
             </div>
-            <div class="folder-header__func">
-                <span>- O <span @click="file.open = false">X</span></span>
+            <div class="folder-header__app-controlls">
+
+                <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
+                    <i class="bi bi-square"></i>
+                </span>
+                <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
+                    <i class="bi bi-window-stack"></i>
+                </span>
+                <span class="app-controlls-item" @click="file.open = false">
+                    <i class="bi bi-x-lg"></i>
+                </span>
             </div>
         </div>
         <div class="folder-body">
@@ -23,7 +33,8 @@ export default {
     },
     data() {
         return {
-            dragUp: false
+            dragUp: false,
+            fullSize: false,
         }
     },
     methods: {
@@ -35,11 +46,14 @@ export default {
         },
         draging(key) {
             if (this.dragUp) {
-                console.log('mouse move');
                 let doc = document.getElementById(key);
                 doc.style.position = "absolute";
                 doc.style.left = event.clientX - 250 + 'px';
+                doc.style.width = "500px"
+                doc.style.height = "500px"
                 doc.style.top = event.clientY - 20 + 'px';
+                doc.style.transition = 'none'
+                this.fullSize = false
                 let folders = document.getElementsByClassName('folder')
                 for (let item of folders) {
                     item.style.zIndex = 1
@@ -49,15 +63,35 @@ export default {
         },
         drop() {
             this.dragUp = false
+            let folders = document.getElementsByClassName('folder')
+            for (let item of folders) {
+                item.style.transition = "all 0.3s ease"
+            }
         },
-        upZindex(key) {
-            console.log('zindex');
-            let doc = document.getElementById(key);
+        upZindex(fileId) {
+            let doc = document.getElementById(fileId);
             let folders = document.getElementsByClassName('folder')
             for (let item of folders) {
                 item.style.zIndex = 1
             }
             doc.style.zIndex = 999
+        },
+        fullSizeWindow(fileId) {
+            let doc = document.getElementById(fileId);
+            doc.style.width = "100vw"
+            doc.style.height = "100vh"
+            this.fullSize = true
+            doc.style.left = '0px'
+            doc.style.top = '0px'
+        },
+        smallSizeWindow(fileId) {
+            let doc = document.getElementById(fileId);
+            doc.style.width = "500px"
+            doc.style.height = "500px"
+            doc.style.left = '200px'
+            doc.style.top = '200px'
+            this.fullSize = false
+
         }
     },
     computed: {
@@ -69,7 +103,7 @@ export default {
 <style scoped>
 .folder-header {
     width: 100%;
-    padding: 5px;
+
     display: flex;
     cursor: pointer;
     flex-direction: row;
@@ -78,8 +112,24 @@ export default {
 
 }
 
-.folder-header__func {
-    align-self: end;
+.filder-header__title {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.app-controlls-item {
+    padding: 8px 26px;
+}
+
+.app-controlls-item:hover {
+    transition: all 0.2s ease;
+    background-color: lightgray;
+}
+
+.folder-header__app-controlls {
+    display: flex;
+    align-items: center;
 }
 
 .folder {
@@ -94,6 +144,7 @@ export default {
     user-select: none;
     background-color: white;
     z-index: 999999;
+    transition: all 0.3s ease;
 }
 
 .hide {

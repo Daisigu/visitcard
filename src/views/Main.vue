@@ -29,7 +29,6 @@ export default {
             let doc = document.getElementById(fileId);
 
             let folders = document.getElementsByClassName('folder')
-            console.log(doc, folders);
             for (let item of folders) {
                 item.style.zIndex = 1
             }
