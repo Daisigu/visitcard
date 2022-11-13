@@ -1,8 +1,7 @@
 <template>
     <div class="main">
         <div class="files-container" @click.self="unActiveFiles()">
-            <File v-for="file, key in files" :file="file" :open="file.open" :img="file.src" :fileActive="file.active"
-               
+            <File v-for="file, key in files" :file="file" :open="file.open" :img="file.src" :fileActive="file.active" 
             @dblclick="openFile(key)" @click="fileActive(key)">
                 {{ file.title }}
             </File>
@@ -35,7 +34,8 @@ export default {
             this.files.forEach((item)=>{
                 item.active=false
             })
-        }
+        },
+       
     },
     computed: {
         ...mapState([

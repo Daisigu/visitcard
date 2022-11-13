@@ -1,5 +1,6 @@
 <template>
-    <div  class="folder" :class="{ hide: !file.open }">
+    <div class="folder" :class="{ hide: !file.open }" :id="file.id" @mousemove="draging(file.id)" 
+        @mousedrop="drop(file.id)" @mousedown="drag(file.id)">
         <div class="folder-header">
             <div class="filder-header__title">
                 <span>{{ file.title }}</span>
@@ -7,7 +8,6 @@
             <div class="folder-header__func">
                 <span>- O <span @click="file.open = false">X</span></span>
             </div>
-
         </div>
         <div class="folder-body">
 
@@ -18,7 +18,27 @@
 <script>
 export default {
     props: {
-        file: Object
+        file: Object,
+    },
+    data() {
+        return {
+            dragUp: false
+        }
+    },
+    methods: {
+        drag(key) {
+            let doc = document.getElementById(key);
+            doc.style.position = "absolute";
+            this.dragUp = true
+        },
+        draging(key) {
+            let doc = document.getElementById(key);
+            doc.style.left = event.clientX - 250 + 'px';
+            doc.style.top = event.clientY - 10 + 'px';
+        },
+        drop(key) {
+            this.dragUp=false
+        }
     }
 }
 </script>
