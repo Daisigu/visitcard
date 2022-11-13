@@ -1,10 +1,9 @@
 <template>
     <div class="main">
         <div class="files-container" @click.self="setFilesUnactive()">
-            <File v-for="file, key in files" :file="file" @dblclick="openFile(key, file.id)" @click="fileActive(key)">
+            <File v-for="file in files" :file="file" @dblclick="openFile(file.id)" @click="fileActive(file.id)">
                 {{ file.title }}
             </File>
-           
         </div>
     </div>
 </template>
@@ -20,21 +19,22 @@ export default {
         ...mapActions([
             'setFilesUnactive'
         ]),
-        fileActive(key) {
+        fileActive(fileId) {
             this.files.forEach((item) => {
                 item.active = false
             })
-            this.files[key].active = true
+            const el = this.files.find(el => el.id == fileId)
+            el.active = true
         },
-        openFile(key, fileId) {
+        openFile(fileId) {
             let doc = document.getElementById(fileId);
-
+            const found = this.files.find(element => element.id == fileId);
+            found.open = true
             let folders = document.getElementsByClassName('folder')
             for (let item of folders) {
                 item.style.zIndex = 1
             }
             doc.style.zIndex = 999
-            this.files[key].open = true
         },
 
     },

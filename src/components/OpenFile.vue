@@ -6,7 +6,6 @@
                 <span>{{ file.title }}</span>
             </div>
             <div class="folder-header__app-controlls">
-
                 <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
                     <i class="bi bi-square"></i>
                 </span>
@@ -19,7 +18,7 @@
             </div>
         </div>
         <div class="folder-body">
-            
+            123123
         </div>
     </div>
 </template>
@@ -27,6 +26,7 @@
 <script>
 import { mapActions, mapState } from 'vuex';
 export default {
+
     props: {
         file: Object,
     },
@@ -35,13 +35,6 @@ export default {
         return {
             dragUp: false,
             fullSize: false,
-            sfile: {
-                title: "Something.config",
-                active: false,
-                src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
-                open: false,
-                id: Date.now() * Math.random(),
-            },
         };
     },
     methods: {
@@ -51,9 +44,9 @@ export default {
         drag() {
             this.dragUp = true;
         },
-        draging(key) {
+        draging(fileId) {
             if (this.dragUp) {
-                let doc = document.getElementById(key);
+                let doc = document.getElementById(fileId);
                 doc.style.position = "absolute";
                 doc.style.left = event.clientX - 250 + "px";
                 doc.style.width = "500px";
@@ -61,11 +54,7 @@ export default {
                 doc.style.top = event.clientY - 20 + "px";
                 doc.style.transition = "none";
                 this.fullSize = false;
-                let folders = document.getElementsByClassName("folder");
-                for (let item of folders) {
-                    item.style.zIndex = 1;
-                }
-                doc.style.zIndex = 999;
+                this.upZindex(fileId)
             }
         },
         drop() {
