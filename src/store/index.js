@@ -32,7 +32,7 @@ export default createStore({
         id: Date.now() * Math.random(),
       },
       {
-        title: "4file.config",
+        title: "doom.exe",
         active: false,
         src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
         open: false,
