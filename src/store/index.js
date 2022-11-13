@@ -31,6 +31,13 @@ export default createStore({
         open: false,
         id: Date.now() * Math.random(),
       },
+      {
+        title: "4file.config",
+        active: false,
+        src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
+        open: false,
+        id: Date.now() * Math.random(),
+      },
     ],
   },
   getters: {},

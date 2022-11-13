@@ -1,13 +1,16 @@
 <template>
     <div class="file-container">
+
         <div class="file-wrapper">
             <div class="file" :class="{ 'active': file.active }" :style="'background-image: url(' + file.src + ');'">
             </div>
             <div class="file-label">
-                <slot></slot>
+                <slot name="title"></slot>
             </div>
         </div>
-        <OpenFile :file="file"></OpenFile>
+        <OpenFile :file="file">
+            <slot name="content"></slot>
+        </OpenFile>
     </div>
 </template>
 

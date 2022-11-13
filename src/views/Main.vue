@@ -1,8 +1,25 @@
 <template>
     <div class="main">
         <div class="files-container" @click.self="setFilesUnactive()">
-            <File v-for="file in files" :file="file" @dblclick="openFile(file.id)" @click="fileActive(file.id)">
+            <!--     <File v-for="file in files" :file="file" @dblclick="openFile(file.id)" @click="fileActive(file.id)">
                 {{ file.title }}
+            </File> -->
+            <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
+                <template v-slot:title>
+                    My projects
+                </template>
+             
+            </File>
+            <File :file="files[1]" @dblclick="openFile(files[1].id)" @click="fileActive(files[1].id)">
+                <template v-slot:title>
+                    tetris.exe
+                </template>
+            </File>
+            <File :file="files[2]" @dblclick="openFile(files[2].id)" @click="fileActive(files[2].id)">
+                <template v-slot:title>My projects</template>
+            </File>
+            <File :file="files[3]" @dblclick="openFile(files[3].id)" @click="fileActive(files[3].id)">
+                <template v-slot:title>My projects</template>
             </File>
         </div>
     </div>

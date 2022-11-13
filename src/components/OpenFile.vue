@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="folder-body">
-            123123
+           <slot></slot>
         </div>
     </div>
 </template>
