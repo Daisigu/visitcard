@@ -1,14 +1,14 @@
 <template>
     <div class="file-container">
         <div class="file-wrapper">
-            <div class="file" :class="{ 'active': fileActive }" :style="'background-image: url('+img+');'">
+            <div class="file" :class="{ 'active': file.active }" :style="'background-image: url('+file.src+');'">
             </div>
             <div class="file-label">
                 <slot></slot>
             </div>
         </div>
 
-        <OpenFile :open="open"></OpenFile>
+        <OpenFile :file="file"></OpenFile>
 
 
 
@@ -23,9 +23,7 @@ export default {
         return {};
     },
     props: {
-        fileActive: Boolean,
-        img: String,
-        open: Boolean,
+        file: Object,
     },
     components: { OpenFile }
 }

@@ -1,7 +1,8 @@
 <template>
     <div class="main">
         <div class="files-container">
-            <File v-for="file, key in files" :open="file.open" :img="file.src" :fileActive="file.active" @click="fileActive(key)">
+            <File v-for="file, key in files" :file="file" :open="file.open" :img="file.src" :fileActive="file.active"
+                @dblclick="openFile(key)" @click="fileActive(key)">
                 {{ file.title }}
             </File>
         </div>
@@ -10,37 +11,12 @@
 
 <script>
 import File from '@/components/File.vue';
+import { mapState } from 'vuex';
 
 export default {
     data() {
         return {
-            files: [
-                {
-                    title: 'My project',
-                    active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
-                    open: false,
-                },
-                {
-                    title: 'tetris.exe',
-                    active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
-                    open: false,
-                },
-                {
-                    title: 'Something.config',
-                    active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
-                    open: false,
-                },
-                {
-                    title: 'Something.config',
-                    active: false,
-                    src: 'https://eeerik.com/apps/Portfolio/portfolio.svg',
-                    open: false,
-                },
 
-            ]
         }
     },
     components: { File },
@@ -48,12 +24,17 @@ export default {
         fileActive(key) {
             this.files.forEach((item) => {
                 item.active = false
-                item.open = false
             })
             this.files[key].active = true
+        },
+        openFile(key) {
             this.files[key].open = true
-
         }
+    },
+    computed: {
+        ...mapState([
+            'files'
+        ])
     }
 }
 </script>
