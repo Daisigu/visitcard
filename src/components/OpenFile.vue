@@ -1,5 +1,5 @@
 <template>
-    <div class="folder" :class="{ hide: !file.open }">
+    <div  class="folder" :class="{ hide: !file.open }">
         <div class="folder-header">
             <div class="filder-header__title">
                 <span>{{ file.title }}</span>

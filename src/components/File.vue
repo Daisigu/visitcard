@@ -1,7 +1,7 @@
 <template>
-    <div class="file-container">
+    <div class="file-container" >
         <div class="file-wrapper">
-            <div class="file" :class="{ 'active': file.active }" :style="'background-image: url('+file.src+');'">
+            <div class="file" :class="{ 'active': file.active }" :style="'background-image: url(' + file.src + ');'">
             </div>
             <div class="file-label">
                 <slot></slot>
@@ -25,15 +25,18 @@ export default {
     props: {
         file: Object,
     },
-    components: { OpenFile }
+    components: { OpenFile },
+   
 }
 </script>
 
 
 <style scoped>
-.file-container{
+.file-container {
     width: 80px;
+    margin-bottom: 30px;
 }
+
 .file {
     cursor: pointer;
     background-position: 50%;
@@ -48,8 +51,7 @@ export default {
     display: flex;
     position: relative;
     flex-direction: column;
-    width: 150px;
-    height: 150px;
+    width: 80px;
     align-items: center;
 }
 
