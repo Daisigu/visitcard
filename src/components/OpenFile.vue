@@ -1,5 +1,5 @@
 <template>
-    <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)">
+    <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)" @click.self="setFilesUnactive()">
         <div class="folder-header" @mousedown.prevent="drag(file.id)" @mousemove="draging(file.id)" @mouseup="drop()"
             @dblclick="fullSizeWindow(file.id)">
             <div class="filder-header__title">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="folder-body">
-           <slot></slot>
+            <slot></slot>
         </div>
     </div>
 </template>
@@ -108,10 +108,11 @@ export default {
     border-bottom: 1px solid lightgray;
 
 }
-.folder-body{
-    padding: 1rem;
+
+.folder-body {
     display: flex;
 }
+
 .filder-header__title {
     display: flex;
     align-items: center;
@@ -124,7 +125,7 @@ export default {
 
 .app-controlls-item:hover {
     transition: all 0.2s ease;
-    background-color: lightgray;
+    background-color: #5cd0f7;
 }
 
 .folder-header__app-controlls {

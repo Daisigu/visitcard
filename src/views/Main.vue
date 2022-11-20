@@ -1,18 +1,17 @@
 <template>
     <div class="main">
-        <div class="files-container" @click.self="setFilesUnactive()">
-            <!--     <File v-for="file in files" :file="file" @dblclick="openFile(file.id)" @click="fileActive(file.id)">
-                {{ file.title }}
-            </File> -->
-            <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
+       <FileContainer @click.self="setFilesUnactive()">
+        <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
                 <template v-slot:title>
                     {{ files[0].title }}
                 </template>
-                <template v-slot:content>
+              <template v-slot:content>
+                <FileContainer>
                     <File :file="files[4]" @dblclick="openFile(files[4].id)" @click="fileActive(files[4].id)">
                         <template v-slot:title>{{ files[4].title }}</template>
                     </File>
-                </template>
+               </FileContainer>
+              </template>
             </File>
 
             <File :file="files[2]" @dblclick="openFile(files[2].id)" @click="fileActive(files[2].id)">
@@ -21,17 +20,18 @@
             <File :file="files[3]" @dblclick="openFile(files[3].id)" @click="fileActive(files[3].id)">
                 <template v-slot:title>{{ files[3].title }}</template>
             </File>
-        </div>
+       </FileContainer>
     </div>
 </template>
 
 <script>
 import File from '@/components/File.vue';
+import FileContainer from '@/components/FileContainer.vue';
 import { mapActions, mapState } from 'vuex';
 
 export default {
 
-    components: { File },
+    components: { File, FileContainer },
     methods: {
         ...mapActions([
             'setFilesUnactive'
@@ -67,12 +67,9 @@ export default {
 <style scoped>
 .main {
     width: 100%;
-}
-
-.files-container {
-    display: flex;
     margin-top: 5rem;
     margin-left: 5rem;
-    flex-direction: column;
 }
+
+
 </style>
