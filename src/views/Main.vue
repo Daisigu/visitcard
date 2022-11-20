@@ -1,50 +1,42 @@
 <template>
     <div class="main">
         <FileContainer @click.self="setFilesUnactive()">
-            <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
+            <File v-for="file in files" :file="file" :arr="files" >
                 <template v-slot:title>
-                    {{ files[0].title }}
+                    {{ file.title }}
                 </template>
             </File>
-            <File :file="files[2]" @dblclick="openFile(files[2].id)" @click="fileActive(files[2].id)">
-                <template v-slot:title>{{ files[2].title }}</template>
-            </File>
-            <File :file="files[3]" @dblclick="openFile(files[3].id)" @click="fileActive(files[3].id)">
-                <template v-slot:title>{{ files[3].title }}</template>
-            </File>
         </FileContainer>
+      
+        <OpenFile v-for="file in files" :file="file">
+            <File v-for="f in file.filesArray" :file="f" :arr="file.filesArray">
+                <template v-slot:title>
+                    {{ f.title }}
+                </template>    
+            </File>
+            <OpenFile v-for="f in file.filesArray" :file="f">
+        
+            </OpenFile>              
+        </OpenFile>
     </div>
 </template>
 
 <script>
 import File from '@/components/File.vue';
 import FileContainer from '@/components/FileContainer.vue';
+import OpenFile from '@/components/OpenFile.vue';
 import { mapActions, mapState } from 'vuex';
 
 export default {
 
-    components: { File, FileContainer },
+    components: { File, FileContainer, OpenFile },
     methods: {
         ...mapActions([
-            'setFilesUnactive'
+            'setFilesUnactive',
+            'fileActive',
+            'openFile'
         ]),
-        fileActive(fileId) {
-            this.files.forEach((item) => {
-                item.active = false
-            })
-            const el = this.files.find(el => el.id == fileId)
-            el.active = true
-        },
-        openFile(fileId) {
-            let doc = document.getElementById(fileId);
-            const found = this.files.find(element => element.id == fileId);
-            found.open = true
-            let folders = document.getElementsByClassName('folder')
-            for (let item of folders) {
-                item.style.zIndex = 1
-            }
-            doc.style.zIndex = 999
-        },
+      
 
     },
     computed: {

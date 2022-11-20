@@ -27,12 +27,13 @@ body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  font-family: 'Nova', monospace;
 }
 
 #app {
   width: 100%;
   height: 100%;
-  font-family: 'Nova', monospace;
+ 
 }
 
 </style>

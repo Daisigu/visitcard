@@ -1,5 +1,7 @@
 <template>
-    <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)" @click.self="setFilesUnactive()">
+    <Teleport to="body">
+        <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
+        @click.self="setFilesUnactive()">
         <div class="folder-header" @mousedown.prevent="drag(file.id)" @mousemove="draging(file.id)" @mouseup="drop()"
             @dblclick="fullSizeWindow(file.id)">
             <div class="filder-header__title">
@@ -12,7 +14,7 @@
                 <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
                     <i class="bi bi-window-stack"></i>
                 </span>
-                <span class="app-controlls-item" @click="file.open = false">
+                <span class="app-controlls-item x" @click="file.open = false">
                     <i class="bi bi-x-lg"></i>
                 </span>
             </div>
@@ -21,16 +23,18 @@
             <slot></slot>
         </div>
     </div>
+    </Teleport>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import File from './File.vue';
+import FileContainer from './FileContainer.vue';
 export default {
-
+    components: { File, FileContainer },
     props: {
         file: Object,
     },
-
     data() {
         return {
             dragUp: false,
@@ -54,7 +58,7 @@ export default {
                 doc.style.top = event.clientY - 20 + "px";
                 doc.style.transition = "none";
                 this.fullSize = false;
-                this.upZindex(fileId)
+                this.upZindex(fileId);
             }
         },
         drop() {
@@ -94,13 +98,14 @@ export default {
             "files"
         ])
     },
+
 }
 </script>
 
 <style scoped>
 .folder-header {
     width: 100%;
-
+    background-color: #c6f1ff;
     display: flex;
     cursor: pointer;
     flex-direction: row;
@@ -110,7 +115,9 @@ export default {
 }
 
 .folder-body {
+    padding: 1rem;
     display: flex;
+    flex-direction: row;
 }
 
 .filder-header__title {
@@ -118,7 +125,9 @@ export default {
     align-items: center;
     margin-left: 10px;
 }
-
+.app-controlls-item.x:hover{
+    background-color: rgb(238, 93, 93);
+}
 .app-controlls-item {
     padding: 8px 26px;
 }
@@ -135,6 +144,7 @@ export default {
 
 .folder {
     width: 500px;
+    border: 1px solid lightgray;
     top: 150px;
     left: 400px;
     height: 500px;

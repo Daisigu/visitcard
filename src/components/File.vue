@@ -1,35 +1,39 @@
 <template>
-    <div class="file-container">
-
+    <div class="file-container" @dblclick="openFile([file.id, arr])" @click="fileActive([file.id, arr])">
         <div class="file-wrapper">
-            <div class="file" :class="{ 'active': file.active }" :style="'background-image: url(' + file.src + '); background-size: 70px'">
+            <div class="file" :class="{ 'active': file.active }"
+                :style="'background-image: url(' + file.src + '); background-size: 70px'">
             </div>
             <div class="file-label">
                 <slot name="title"></slot>
             </div>
         </div>
-        <OpenFile :file="file">
-            <slot name="content"></slot>
-        </OpenFile>
+       
     </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import OpenFile from './OpenFile.vue';
 
 export default {
+    name: 'File',
     data() {
         return {};
     },
     props: {
         file: Object,
+        arr: Array
     },
-    components: { OpenFile },
-
+    methods: {
+        ...mapActions([
+            "openFile",
+            "fileActive"
+        ])
+    },
+    components: { OpenFile }
 }
 </script>
-
-
 <style scoped>
 .file-container {
     width: 80px;
