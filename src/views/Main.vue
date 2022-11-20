@@ -6,32 +6,20 @@
             </File> -->
             <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
                 <template v-slot:title>
-                    My projects
+                    {{ files[0].title }}
                 </template>
                 <template v-slot:content>
-
                     <File :file="files[4]" @dblclick="openFile(files[4].id)" @click="fileActive(files[4].id)">
-                        <template v-slot:title>
-                            doom.exe
-                        </template>
-                        <template v-slot:content>
-                            <img src="https://preview.redd.it/9h2hgrewohn41.jpg?auto=webp&s=3c4e77bf2d63b7e800909fe81bf032276e15798c"
-                                style="width: 100%" alt="">
-                        </template>
-                    </File>
-                    <File :file="files[1]" @dblclick="openFile(files[1].id)" @click="fileActive(files[1].id)">
-                        <template v-slot:title>
-                            tetris.exe
-                        </template>
+                        <template v-slot:title>{{ files[4].title }}</template>
                     </File>
                 </template>
             </File>
 
             <File :file="files[2]" @dblclick="openFile(files[2].id)" @click="fileActive(files[2].id)">
-                <template v-slot:title>My projects</template>
+                <template v-slot:title>{{ files[2].title }}</template>
             </File>
             <File :file="files[3]" @dblclick="openFile(files[3].id)" @click="fileActive(files[3].id)">
-                <template v-slot:title>My projects</template>
+                <template v-slot:title>{{ files[3].title }}</template>
             </File>
         </div>
     </div>

@@ -2,7 +2,7 @@
     <div class="file-container">
 
         <div class="file-wrapper">
-            <div class="file" :class="{ 'active': file.active }" :style="'background-image: url(' + file.src + ');'">
+            <div class="file" :class="{ 'active': file.active }" :style="'background-image: url(' + file.src + '); background-size: 70px'">
             </div>
             <div class="file-label">
                 <slot name="title"></slot>

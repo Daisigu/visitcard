@@ -11,21 +11,21 @@ export default createStore({
         id: Date.now() * Math.random(),
       },
       {
-        title: "tetris.exe",
+        title: "chat.exe",
         active: false,
         src: "http://localhost:8080/img/chat.93c789ef.svg",
         open: false,
         id: Date.now() * Math.random(),
       },
       {
-        title: "Something.config",
+        title: "aboutme.docx",
         active: false,
         src: "http://localhost:8080/img/portfolio.4a8b87ea.svg",
         open: false,
         id: Date.now() * Math.random(),
       },
       {
-        title: "Something.config",
+        title: "tetris.exe",
         active: false,
         src: "http://localhost:8080/img/tetris.c7c1fc5f.svg",
         open: false,
@@ -34,7 +34,7 @@ export default createStore({
       {
         title: "doom.exe",
         active: false,
-        src: "https://eeerik.com/apps/Portfolio/portfolio.svg",
+        src: "https://freepngimg.com/download/doom/35079-1-doom-file.png",
         open: false,
         id: Date.now() * Math.random(),
       },
