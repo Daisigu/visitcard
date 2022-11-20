@@ -23,7 +23,7 @@ export default {
 }
 
 body {
-  background: rgb(255, 221, 29);
+  background: #64e075;
   width: 100%;
   overflow: hidden;
 }
@@ -31,7 +31,7 @@ body {
 #app {
   width: 100%;
   height: 100%;
-  font-family: 'Inconsolata', monospace;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Nova', monospace;
 }
+
 </style>

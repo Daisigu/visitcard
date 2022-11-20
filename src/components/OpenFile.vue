@@ -47,7 +47,7 @@ export default {
         draging(fileId) {
             if (this.dragUp) {
                 let doc = document.getElementById(fileId);
-                doc.style.position = "absolute";
+                doc.style.position = "fixed";
                 doc.style.left = event.clientX - 250 + "px";
                 doc.style.width = "500px";
                 doc.style.height = "500px";
@@ -108,7 +108,10 @@ export default {
     border-bottom: 1px solid lightgray;
 
 }
-
+.folder-body{
+    padding: 1rem;
+    display: flex;
+}
 .filder-header__title {
     display: flex;
     align-items: center;
@@ -134,7 +137,7 @@ export default {
     top: 150px;
     left: 400px;
     height: 500px;
-    position: fixed;
+    position: absolute;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

@@ -33,7 +33,8 @@ export default {
 <style scoped>
 .file-container {
     width: 80px;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    margin-right: 20px;
 }
 
 .file {
@@ -63,7 +64,7 @@ export default {
     -ms-user-select: none;
     user-select: none;
     text-align: center;
-    font-size: 10px;
+    font-size: 13px;
     padding: 6px 6px 4px 6px;
     letter-spacing: 1.06px;
     line-height: 1px;
