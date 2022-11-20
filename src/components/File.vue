@@ -38,7 +38,7 @@ export default {
 .file-container {
     width: 80px;
     margin-bottom: 40px;
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .file {
@@ -62,22 +62,26 @@ export default {
 .file-label {
     color: black;
     position: absolute;
-    top: 80px;
+    top: 95px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     text-align: center;
+    display: block;
     font-size: 13px;
-    padding: 6px 6px 4px 6px;
     letter-spacing: 1.06px;
-    line-height: 1px;
-    margin-top: 15px;
     white-space: nowrap;
+    width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .file.active+.file-label {
     color: white;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    text-overflow: none;
     box-shadow: blue 0px 0px 0px 6px;
     background-color: blue;
 }

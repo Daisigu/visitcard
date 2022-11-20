@@ -14,7 +14,7 @@
                 <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
                     <i class="bi bi-window-stack"></i>
                 </span>
-                <span class="app-controlls-item x" @click="file.open = false">
+                <span class="app-controlls-item x" @click="closeWindow(file.id); file.open=false">
                     <i class="bi bi-x-lg"></i>
                 </span>
             </div>
@@ -91,6 +91,11 @@ export default {
             doc.style.left = "200px";
             doc.style.top = "200px";
             this.fullSize = false;
+        },
+        closeWindow(fileId){
+            let doc = document.getElementById(fileId);
+            doc.style.width = "500px";
+            doc.style.height = "500px";
         }
     },
     computed: {
@@ -160,8 +165,8 @@ export default {
 
 .hide {
     z-index: -999;
-    bottom: -1500px;
-    right: -1500px;
+    bottom: -2500px !important;
+    left: -2500px !important;
     transform: translate(-542px, 518px);
     transition: all 0.5s ease;
     opacity: 0;

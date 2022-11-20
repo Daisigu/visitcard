@@ -15,7 +15,7 @@
                 </template>    
             </File>
             <OpenFile v-for="f in file.filesArray" :file="f">
-        
+                
             </OpenFile>              
         </OpenFile>
     </div>

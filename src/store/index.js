@@ -11,18 +11,18 @@ export default createStore({
         id: Date.now() * Math.random(),
         filesArray: [
           {
-            title: "chat1.exe",
+            title: "MyProjectV1.docx",
             active: false,
-            src: "http://localhost:8080/img/chat.93c789ef.svg",
+            src: "http://localhost:8080/img/project.898c0b61.svg",
             open: false,
-            id: 123,
+            id: Date.now() * Math.random(),
           },
           {
-            title: "chat12.exe",
+            title: "MyProjectV2.docx",
             active: false,
-            src: "http://localhost:8080/img/chat.93c789ef.svg",
+            src: "http://localhost:8080/img/project.898c0b61.svg",
             open: false,
-            id: 321,
+            id: Date.now() * Math.random(),
           },
         ],
       },
@@ -61,7 +61,9 @@ export default createStore({
     setFilesUnactive(state) {
       state.files.forEach((item) => {
         item.active = false;
-        item.filesArray ? item.filesArray.forEach(i => i.active=false) : 0
+        item.filesArray
+          ? item.filesArray.forEach((i) => (i.active = false))
+          : 0;
       });
     },
   },
@@ -72,10 +74,10 @@ export default createStore({
     fileActive({ commit, state }, args) {
       const fileId = args[0];
       const arr = args[1];
-      state.files.forEach(i=>{
-        i.active=false
-        i.filesArray ? i.filesArray.forEach(i=>i.active=false) : 0
-      })
+      state.files.forEach((i) => {
+        i.active = false;
+        i.filesArray ? i.filesArray.forEach((i) => (i.active = false)) : 0;
+      });
       const el = arr.find((el) => el.id == fileId);
       el.active = true;
     },
