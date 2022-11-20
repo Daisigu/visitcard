@@ -138,7 +138,7 @@ export default {
     top: 150px;
     left: 400px;
     height: 500px;
-    position: absolute;
+    position: fixed;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

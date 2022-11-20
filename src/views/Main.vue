@@ -1,26 +1,18 @@
 <template>
     <div class="main">
-       <FileContainer @click.self="setFilesUnactive()">
-        <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
+        <FileContainer @click.self="setFilesUnactive()">
+            <File :file="files[0]" @dblclick="openFile(files[0].id)" @click="fileActive(files[0].id)">
                 <template v-slot:title>
                     {{ files[0].title }}
                 </template>
-              <template v-slot:content>
-                <FileContainer>
-                    <File :file="files[4]" @dblclick="openFile(files[4].id)" @click="fileActive(files[4].id)">
-                        <template v-slot:title>{{ files[4].title }}</template>
-                    </File>
-               </FileContainer>
-              </template>
             </File>
-
             <File :file="files[2]" @dblclick="openFile(files[2].id)" @click="fileActive(files[2].id)">
                 <template v-slot:title>{{ files[2].title }}</template>
             </File>
             <File :file="files[3]" @dblclick="openFile(files[3].id)" @click="fileActive(files[3].id)">
                 <template v-slot:title>{{ files[3].title }}</template>
             </File>
-       </FileContainer>
+        </FileContainer>
     </div>
 </template>
 
@@ -70,6 +62,4 @@ export default {
     margin-top: 5rem;
     margin-left: 5rem;
 }
-
-
 </style>
