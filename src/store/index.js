@@ -11,7 +11,7 @@ export default createStore({
         id: Date.now() * Math.random(),
         filesArray: [
           {
-            title: "MyProjectV1.docx",
+            title: "background.exe",
             active: false,
             src: require('@/assets/project.svg'),
             open: false,
