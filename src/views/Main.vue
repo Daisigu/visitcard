@@ -27,11 +27,12 @@
 import File from '@/components/File.vue';
 import FileContainer from '@/components/FileContainer.vue';
 import OpenFile from '@/components/OpenFile.vue';
+import Spinner from '@/components/UI-elements/spinner.vue';
 import { mapActions, mapState } from 'vuex';
 
 export default {
 
-    components: { File, FileContainer, OpenFile },
+    components: { File, FileContainer, OpenFile, Spinner },
     methods: {
         ...mapActions([
             'setFilesUnactive',

@@ -1,14 +1,19 @@
 <template>
     <div class="dall-e-file">
+        <Spinner :fullscreen="true" :show="true"></Spinner>
         <h1 class="dall-e-title">Generate your background </h1>
-        <textarea class="dall-e-textarea" type="text" v-model="inp">
+        <textarea class="dall-e-textarea" type="text" v-model="promptValue">
         </textarea>
-        <button class="dall-e-button" @click="generateImage()">Generate</button>
+        <div>
+            <button class="dall-e-button" @click="generateImage()">Set background</button>
+            <button class="dall-e-button" @click="resetBackground()">Reset</button>
+        </div>
     </div>
 </template>
 
 <script>
 import { Configuration, OpenAIApi } from "openai";
+import Spinner from "../UI-elements/spinner.vue";
 const configuration = new Configuration({
     apiKey: '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',
 });
@@ -16,23 +21,28 @@ const openai = new OpenAIApi(configuration);
 export default {
     data() {
         return {
-            inp: '',
-            imageUrl: '',
-        }
+            promptValue: "",
+            imageUrl: "",
+        };
     },
     methods: {
         async generateImage() {
             const res = await openai.createImage({
-                prompt: this.inp,
+                prompt: this.promptValue,
                 n: 1,
                 size: "1024x1024",
             });
-            this.imageUrl = res.data.data[0].url
-            document.body.style.backgroundImage = 'url(' + this.imageUrl + ')'
-            document.body.style.backgroundPosition = "center"
-            document.body.style.backgroundSize = "cover"
+            this.imageUrl = res.data.data[0].url;
+            document.body.style.backgroundImage = "url(" + this.imageUrl + ")";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.backgroundSize = "cover";
+            this.promptValue = "";
+        },
+        resetBackground() {
+            document.body.style.backgroundImage = "";
         }
-    }
+    },
+    components: { Spinner }
 }
 </script>
 
@@ -67,6 +77,7 @@ export default {
 .dall-e-button {
     margin-top: 1rem;
     cursor: pointer;
+    margin-right: 1rem;
 }
 
 .dall-e-title {
@@ -122,17 +133,18 @@ export default {
 
 }
 
- button,
+button,
 button::after {
-    width: 380px;
-    height: 86px;
-    font-size: 36px;
+    width: 169px;
+    height: 56px;
+    font-size: 17px;
     background: linear-gradient(45deg, transparent 5%, #FF013C 5%);
     border: 0;
+    font-family: 'Nova', monospace;
     color: #fff;
-    letter-spacing: 3px;
-    line-height: 88px;
-    box-shadow: 6px 0px 0px #00E6F6;
+    letter-spacing: 2px;
+    line-height: 17px;
+    box-shadow: 6px 0px 0px #00e6f6;
     outline: transparent;
     position: relative;
 }
@@ -145,7 +157,7 @@ button::after {
     --slice-4: inset(40% -6px 43% 0);
     --slice-5: inset(80% -6px 5% 0);
 
-    content: 'GENERATE';
+    content: '1234124124124';
     display: block;
     position: absolute;
     top: 0;
@@ -217,5 +229,5 @@ button:hover::after {
         clip-path: var(--slice-1);
         transform: translate(0);
     }
-} 
+}
 </style>
