@@ -2,7 +2,8 @@
     <Teleport to="body">
         <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
         @click.self="setFilesUnactive()">
-        <div class="folder-header" @mousedown.prevent="drag(file.id)" @mousemove="draging(file.id)" @mouseup="drop()"
+        <Draganddrop :file="file">
+            <div class="folder-header"
             @dblclick="fullSizeWindow(file.id)">
             <div class="filder-header__title">
                 <span>{{ file.title }}</span>
@@ -19,6 +20,7 @@
                 </span>
             </div>
         </div>
+        </Draganddrop>
         <div class="folder-body">
             <slot></slot>
         </div>
@@ -28,16 +30,16 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
+import Draganddrop from './draganddrop.vue';
 import File from './File.vue';
 import FileContainer from './FileContainer.vue';
 export default {
-    components: { File, FileContainer },
+    components: { File, FileContainer, Draganddrop },
     props: {
         file: Object,
     },
     data() {
         return {
-            dragUp: false,
             fullSize: false,
         };
     },
@@ -45,29 +47,7 @@ export default {
         ...mapActions([
             "setFilesUnactive"
         ]),
-        drag() {
-            this.dragUp = true;
-        },
-        draging(fileId) {
-            if (this.dragUp) {
-                let doc = document.getElementById(fileId);
-                doc.style.position = "fixed";
-                doc.style.left = event.clientX - 250 + "px";
-                doc.style.width = "500px";
-                doc.style.height = "500px";
-                doc.style.top = event.clientY - 20 + "px";
-                doc.style.transition = "none";
-                this.fullSize = false;
-                this.upZindex(fileId);
-            }
-        },
-        drop() {
-            this.dragUp = false;
-            let folders = document.getElementsByClassName("folder");
-            for (let item of folders) {
-                item.style.transition = "all 0.3s ease";
-            }
-        },
+      
         upZindex(fileId) {
             let doc = document.getElementById(fileId);
             let folders = document.getElementsByClassName("folder");
