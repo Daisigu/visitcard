@@ -1,6 +1,7 @@
 <template>
     <div class="dall-e-file" v-on:keyup.enter="generateImage()">
         <Spinner :fullscreen="true" :show="loading"></Spinner>
+
         <h1 class="dall-e-title">Generate your background </h1>
         <textarea class="dall-e-textarea" type="text" v-model="promptValue">
         </textarea>
@@ -13,7 +14,7 @@
 
 <script>
 import { Configuration, OpenAIApi } from "openai";
-import Spinner from "../UI-elements/spinner.vue";
+import Spinner from "@/components/UI-elements/spinner.vue";
 const configuration = new Configuration({
     apiKey: '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',
 });

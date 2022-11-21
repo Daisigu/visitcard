@@ -35,11 +35,11 @@
 <script>
 
 import { mapActions, mapState } from 'vuex';
-import AboutMe from './AboutMe/about-me.vue'
+import AboutMe from '@/files-components/AboutMe/about-me.vue'
 import Tetris from '@/files-components/tetris/tetris.vue'
 
-import Chat from './Chat/chat.vue';
-import DallE from './Dall-e/dall-e.vue';
+import Chat from '@/files-components/Chat/chat.vue';
+import DallE from '@/files-components/Dall-e/dall-e.vue';
 import Draganddrop from './draganddrop.vue';
 import File from './File.vue';
 import FileContainer from './FileContainer.vue';
