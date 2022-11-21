@@ -4,20 +4,21 @@ export default createStore({
   state: {
     files: [
       {
-        title: "My project",
+        title: "background.exe",
+        active: false,
+        src: require('@/assets/project.svg'),
+        open: false,
+        id: Date.now() * Math.random(),
+        component: 'dall-e'
+      },
+      {
+        title: "My projects",
         active: false,
         src: require('@/assets/project.svg'),
         open: false,
         id: Date.now() * Math.random(),
         filesArray: [
-          {
-            title: "background.exe",
-            active: false,
-            src: require('@/assets/project.svg'),
-            open: false,
-            id: Date.now() * Math.random(),
-            component: 'dall-e'
-          },
+          
           {
             title: "MyProjectV2.docx",
             active: false,

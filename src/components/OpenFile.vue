@@ -2,7 +2,7 @@
     <Teleport to="body">
         <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
         @click.self="setFilesUnactive()">
-        <Draganddrop :file="file">
+        <Draganddrop :file="file" >
             <div class="folder-header"
             @dblclick="fullSizeWindow(file.id)">
             <div class="filder-header__title">
@@ -104,7 +104,8 @@ export default {
 
 .folder-body {
     display: flex;
-    height: 100%;
+    height: -webkit-fill-available;
+    position: absolute;
     width: 100%;
     flex-direction: row;
 }
@@ -132,11 +133,14 @@ export default {
 }
 
 .folder {
-    width: 500px;
+    min-width: 500px;
+    min-height: 500px;
+    max-width: 100%;
+    max-height: 100%;
     border: 1px solid lightgray;
     top: 150px;
     left: 400px;
-    height: 500px;
+   
     position: fixed;
     -webkit-user-select: none;
     -moz-user-select: none;

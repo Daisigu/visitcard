@@ -39,6 +39,7 @@ export default {
     width: 80px;
     margin-bottom: 40px;
     margin-right: 40px;
+    margin-left: 30px;
 }
 
 .file {

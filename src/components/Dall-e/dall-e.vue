@@ -1,6 +1,6 @@
 <template>
-    <div class="dall-e-file">
-        <Spinner :fullscreen="true" :show="true"></Spinner>
+    <div class="dall-e-file" v-on:keyup.enter="generateImage()">
+        <Spinner :fullscreen="true" :show="loading"></Spinner>
         <h1 class="dall-e-title">Generate your background </h1>
         <textarea class="dall-e-textarea" type="text" v-model="promptValue">
         </textarea>
@@ -23,19 +23,22 @@ export default {
         return {
             promptValue: "",
             imageUrl: "",
+            loading: false,
         };
     },
     methods: {
         async generateImage() {
+            this.loading = true
             const res = await openai.createImage({
                 prompt: this.promptValue,
                 n: 1,
                 size: "1024x1024",
             });
+            this.loading = false
             this.imageUrl = res.data.data[0].url;
             document.body.style.backgroundImage = "url(" + this.imageUrl + ")";
             document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundSize = "100% 100%";
             this.promptValue = "";
         },
         resetBackground() {

@@ -9,10 +9,11 @@ export default {
     data() {
         return {
             dragUp: false,
+            
         }
     },
     props: {
-        file: Object
+        file: Object,
     },
     methods: {
         drag() {
@@ -35,8 +36,8 @@ export default {
                 doc.style.height = "500px";
                 doc.style.top = event.clientY - 20 + "px";
                 doc.style.transition = "none";
-                this.fullSize = false;
                 this.upZindex(fileId);
+               this.$parent.fullSize=false;
             }
         },
         drop() {
