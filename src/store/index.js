@@ -6,21 +6,22 @@ export default createStore({
       {
         title: "My project",
         active: false,
-        src: "http://localhost:8080/img/project.898c0b61.svg",
+        src: require('@/assets/project.svg'),
         open: false,
         id: Date.now() * Math.random(),
         filesArray: [
           {
             title: "MyProjectV1.docx",
             active: false,
-            src: "http://localhost:8080/img/project.898c0b61.svg",
+            src: require('@/assets/project.svg'),
             open: false,
             id: Date.now() * Math.random(),
+            component: 'dall-e'
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: "http://localhost:8080/img/project.898c0b61.svg",
+            src: require('@/assets/project.svg'),
             open: false,
             id: Date.now() * Math.random(),
           },
@@ -29,21 +30,21 @@ export default createStore({
       {
         title: "chat.exe",
         active: false,
-        src: "http://localhost:8080/img/chat.93c789ef.svg",
+        src: require('@/assets/chat.svg'),
         open: false,
         id: Date.now() * Math.random(),
       },
       {
         title: "aboutme.docx",
         active: false,
-        src: "http://localhost:8080/img/portfolio.4a8b87ea.svg",
+        src: require('@/assets/portfolio.svg'),
         open: false,
         id: Date.now() * Math.random(),
       },
       {
         title: "tetris.exe",
         active: false,
-        src: "http://localhost:8080/img/tetris.c7c1fc5f.svg",
+        src: require('@/assets/tetris.svg'),
         open: false,
         id: Date.now() * Math.random(),
       },

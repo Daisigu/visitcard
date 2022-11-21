@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <FileContainer @click.self="setFilesUnactive()">
+        <FileContainer :direction="'column'" @click.self="setFilesUnactive()">
             <File v-for="file in files" :file="file" :arr="files" >
                 <template v-slot:title>
                     {{ file.title }}
@@ -9,11 +9,13 @@
         </FileContainer>
       
         <OpenFile v-for="file in files" :file="file">
+           <FileContainer :direction="'row'">
             <File v-for="f in file.filesArray" :file="f" :arr="file.filesArray">
                 <template v-slot:title>
                     {{ f.title }}
                 </template>    
             </File>
+           </FileContainer>
             <OpenFile v-for="f in file.filesArray" :file="f">
                 
             </OpenFile>              

@@ -23,18 +23,21 @@
         </Draganddrop>
         <div class="folder-body">
             <slot></slot>
+            <component :is="file.component"></component>
         </div>
     </div>
     </Teleport>
 </template>
 
 <script>
+
 import { mapActions, mapState } from 'vuex';
+import DallE from './Dall-e/dall-e.vue';
 import Draganddrop from './draganddrop.vue';
 import File from './File.vue';
 import FileContainer from './FileContainer.vue';
 export default {
-    components: { File, FileContainer, Draganddrop },
+    components: { File, FileContainer, Draganddrop, DallE },
     props: {
         file: Object,
     },
@@ -100,7 +103,6 @@ export default {
 }
 
 .folder-body {
-    padding: 1rem;
     display: flex;
     flex-direction: row;
 }
