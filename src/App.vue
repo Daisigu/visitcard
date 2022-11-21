@@ -1,13 +1,19 @@
 <template>
-  <div>
+  <div class="app" @click.self="setFilesUnactive()">
     <Main></Main>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import Main from './views/Main.vue';
 
 export default {
+  methods: {
+    ...mapActions([
+    'setFilesUnactive'
+  ])
+  },
   components: { Main }
 }
 </script>
@@ -34,6 +40,10 @@ body {
   width: 100%;
   height: 100%;
  
+}
+.app{
+  width: 100%;
+  height: 100%;
 }
 
 </style>

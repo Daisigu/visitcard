@@ -34,6 +34,7 @@ export default createStore({
         src: require('@/assets/chat.svg'),
         open: false,
         id: Date.now() * Math.random(),
+        component: 'chat'
       },
       {
         title: "aboutme.docx",
@@ -41,6 +42,7 @@ export default createStore({
         src: require('@/assets/portfolio.svg'),
         open: false,
         id: Date.now() * Math.random(),
+        component: 'about-me'
       },
       {
         title: "tetris.exe",
@@ -48,14 +50,9 @@ export default createStore({
         src: require('@/assets/tetris.svg'),
         open: false,
         id: Date.now() * Math.random(),
+        component: 'tetris'
       },
-      {
-        title: "doom.exe",
-        active: false,
-        src: "https://freepngimg.com/download/doom/35079-1-doom-file.png",
-        open: false,
-        id: Date.now() * Math.random(),
-      },
+      
     ],
   },
   getters: {},

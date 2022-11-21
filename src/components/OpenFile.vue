@@ -25,19 +25,26 @@
             <slot></slot>
             <component :is="file.component"></component>
         </div>
+        
     </div>
+    
+    
     </Teleport>
 </template>
 
 <script>
 
 import { mapActions, mapState } from 'vuex';
+import AboutMe from './AboutMe/about-me.vue'
+import Tetris from '@/files-components/tetris/tetris.vue'
+
+import Chat from './Chat/chat.vue';
 import DallE from './Dall-e/dall-e.vue';
 import Draganddrop from './draganddrop.vue';
 import File from './File.vue';
 import FileContainer from './FileContainer.vue';
 export default {
-    components: { File, FileContainer, Draganddrop, DallE },
+    components: { File, FileContainer, Draganddrop, DallE, Chat, AboutMe, Tetris},
     props: {
         file: Object,
     },
