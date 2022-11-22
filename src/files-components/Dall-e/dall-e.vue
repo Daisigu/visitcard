@@ -3,10 +3,10 @@
         <Spinner :fullscreen="true" :show="loading"></Spinner>
 
         <h1 class="dall-e-title">Generate your background </h1>
-        <textarea class="dall-e-textarea" type="text" v-model="promptValue">
+        <textarea placeholder="Type anything..." class="dall-e-textarea" type="text" v-model="promptValue">
         </textarea>
         <div>
-            <button class="dall-e-button" @click="generateImage()">Set background</button>
+            <button :disabled="!promptValue" class="dall-e-button" @click="generateImage()">Set background</button>
             <button class="dall-e-button" @click="resetBackground()">Reset</button>
         </div>
     </div>
@@ -15,8 +15,9 @@
 <script>
 import { Configuration, OpenAIApi } from "openai";
 import Spinner from "@/components/UI-elements/spinner.vue";
+
 const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: process.env.VUE_APP_NOT_SECRET_CODE,
 });
 const openai = new OpenAIApi(configuration);
 export default {
@@ -30,6 +31,7 @@ export default {
     methods: {
         async generateImage() {
             this.loading = true
+           try {
             const res = await openai.createImage({
                 prompt: this.promptValue,
                 n: 1,
@@ -41,6 +43,12 @@ export default {
             document.body.style.backgroundPosition = "center";
             document.body.style.backgroundSize = "100% 100%";
             this.promptValue = "";
+           }
+           catch(e){
+            alert('Invalid request, try something else');
+            this.loading=false
+            this.promptValue=''
+           }
         },
         resetBackground() {
             document.body.style.backgroundImage = "";
