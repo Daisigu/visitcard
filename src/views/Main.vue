@@ -1,27 +1,27 @@
 <template>
     <div class="main">
         <FileContainer :direction="'column'" @click.self="setFilesUnactive()">
-            <File v-for="file in files" :file="file" :arr="files">
+            <File v-for="file in files" :key="file.id" :file="file" :arr="files">
                 <template v-slot:title>
                     {{ file.title }}
                 </template>
             </File>
         </FileContainer>
 
-        <OpenFile v-for="file in files" :file="file">
-        
-                <File v-for="f in file.filesArray" :file="f" :arr="file.filesArray">
-                    <template v-slot:title>
-                        {{ f.title }}
-                    </template>
-                </File>
-          
-            <OpenFile v-for="f in file.filesArray" :file="f">
+        <OpenFile v-for="file in files" :file="file" :key="file.id">
+
+            <File v-for="f in file.filesArray" :file="f" :arr="file.filesArray" :key="f.id">
+                <template v-slot:title>
+                    {{ f.title }}
+                </template>
+            </File>
+
+            <OpenFile v-for="f in file.filesArray" :file="f" :key="f.id">
 
             </OpenFile>
         </OpenFile>
     </div>
-    
+
 </template>
 
 <script>
@@ -55,6 +55,6 @@ export default {
 <style scoped>
 .main {
     width: 100%;
-   
+
 }
 </style>
