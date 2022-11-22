@@ -50,7 +50,8 @@ export default createStore({
         src: require('@/assets/tetris.svg'),
         open: false,
         id: Date.now() * Math.random(),
-        component: 'tetris'
+        component: 'tetris',
+        windowed: true,
       },
       
     ],

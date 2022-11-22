@@ -9,12 +9,14 @@
                 <span>{{ file.title }}</span>
             </div>
             <div class="folder-header__app-controlls">
-                <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
+                <div v-if="!file.windowed">
+                    <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
                     <i class="bi bi-square"></i>
                 </span>
                 <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
                     <i class="bi bi-window-stack"></i>
                 </span>
+                </div>
                 <span class="app-controlls-item x" @click="closeWindow(file.id); file.open=false">
                     <i class="bi bi-x-lg"></i>
                 </span>
@@ -67,25 +69,27 @@ export default {
             doc.style.zIndex = 999;
         },
         fullSizeWindow(fileId) {
-            let doc = document.getElementById(fileId);
+            if(!this.file.windowed){
+                let doc = document.getElementById(fileId);
             doc.style.width = "100vw";
             doc.style.height = "100vh";
             this.fullSize = true;
             doc.style.left = "0px";
             doc.style.top = "0px";
+            }
         },
         smallSizeWindow(fileId) {
             let doc = document.getElementById(fileId);
-            doc.style.width = "500px";
-            doc.style.height = "500px";
+            doc.style.width = "700px";
+            doc.style.height = "700px";
             doc.style.left = "200px";
             doc.style.top = "200px";
             this.fullSize = false;
         },
         closeWindow(fileId){
             let doc = document.getElementById(fileId);
-            doc.style.width = "500px";
-            doc.style.height = "500px";
+            doc.style.width = "700px";
+            doc.style.height = "700px";
         }
     },
     computed: {
@@ -140,8 +144,8 @@ export default {
 }
 
 .folder {
-    min-width: 500px;
-    min-height: 500px;
+    min-width: 700px;
+    min-height: 700px;
     max-width: 100%;
     max-height: 100%;
     border: 1px solid lightgray;
@@ -160,8 +164,8 @@ export default {
 
 .hide {
     z-index: -999;
-    bottom: -2500px !important;
-    left: -2500px !important;
+    bottom: -2700px !important;
+    left: -2700px !important;
     transform: translate(-542px, 518px);
     transition: all 0.5s ease;
     opacity: 0;

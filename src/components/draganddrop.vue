@@ -32,8 +32,8 @@ export default {
                 let doc = document.getElementById(fileId);
                 doc.style.position = "fixed";
                 doc.style.left = event.clientX - 250 + "px";
-                doc.style.width = "500px";
-                doc.style.height = "500px";
+                doc.style.width = "700px";
+                doc.style.height = "700px";
                 doc.style.top = event.clientY - 20 + "px";
                 doc.style.transition = "none";
                 this.upZindex(fileId);
