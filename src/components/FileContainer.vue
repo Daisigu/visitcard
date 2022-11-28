@@ -13,8 +13,8 @@ export default {
 <style  scoped>
 .files-container {
     display: flex;
-    margin-top: 1rem;
-    margin-left: 1rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
     flex-direction: column;
 }
 </style>
