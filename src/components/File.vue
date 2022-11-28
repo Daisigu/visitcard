@@ -8,7 +8,7 @@
                 <slot name="title"></slot>
             </div>
         </div>
-       
+
     </div>
 </template>
 
@@ -36,12 +36,15 @@ export default {
 </script>
 <style scoped>
 .file-container {
-    width: 80px;
+    width: 99px;
     margin-bottom: 40px;
-    margin-right: 40px;
-    margin-left: 30px;
+    margin-right: 20px;
+    margin-left: 20px;
+    height: 100px;
 }
-
+.file-container:has(.file.active){
+    z-index: 9999;
+}
 .file {
     cursor: pointer;
     background-position: 50%;
@@ -56,7 +59,6 @@ export default {
     display: flex;
     position: relative;
     flex-direction: column;
-    width: 80px;
     align-items: center;
 }
 

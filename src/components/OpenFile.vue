@@ -1,36 +1,37 @@
 <template>
     <Teleport to="body">
-        <div class="folder"  :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
-        @click.self="setFilesUnactive()">
-        <Draganddrop :file="file" >
-            <div class="folder-header"
-            @dblclick="fullSizeWindow(file.id)">
-            <div class="filder-header__title">
-                <span>{{ file.title }}</span>
-            </div>
-            <div class="folder-header__app-controlls">
-                <div v-if="!file.windowed">
-                    <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
-                    <i class="bi bi-square"></i>
-                </span>
-                <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
-                    <i class="bi bi-window-stack"></i>
-                </span>
-                </div>
-                <span class="app-controlls-item x" @click="closeWindow(file.id); file.open=false">
-                    <i class="bi bi-x-lg"></i>
-                </span>
-            </div>
-        </div>
-        </Draganddrop>
-        <div class="folder-body">
-            <slot></slot>
-            <component :is="file.component"></component>
-        </div>
+        <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
+
         
-    </div>
-    
-    
+            @click.self="setFilesUnactive()">
+            <Draganddrop :file="file">
+                <div class="folder-header" @dblclick="fullSizeWindow(file.id)">
+                    <div class="filder-header__title">
+                        <span>{{ file.title }}</span>
+                    </div>
+                    <div class="folder-header__app-controlls">
+                        <div v-if="!file.windowed">
+                            <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
+                                <i class="bi bi-square"></i>
+                            </span>
+                            <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
+                                <i class="bi bi-window-stack"></i>
+                            </span>
+                        </div>
+                        <span class="app-controlls-item x" @click="closeWindow(file.id); file.open = false">
+                            <i class="bi bi-x-lg"></i>
+                        </span>
+                    </div>
+                </div>
+            </Draganddrop>
+            <div class="folder-body">
+                <slot></slot>
+                <component :is="file.component"></component>
+            </div>
+
+        </div>
+
+
     </Teleport>
 </template>
 
@@ -45,7 +46,7 @@ import Draganddrop from './draganddrop.vue';
 import File from './File.vue';
 import FileContainer from './FileContainer.vue';
 export default {
-    components: { File, FileContainer, Draganddrop, DallE, Chat, AboutMe, Tetris},
+    components: { File, FileContainer, Draganddrop, DallE, Chat, AboutMe, Tetris },
     props: {
         file: Object,
     },
@@ -58,7 +59,7 @@ export default {
         ...mapActions([
             "setFilesUnactive"
         ]),
-      
+
         upZindex(fileId) {
             let doc = document.getElementById(fileId);
             let folders = document.getElementsByClassName("folder");
@@ -68,13 +69,13 @@ export default {
             doc.style.zIndex = 999;
         },
         fullSizeWindow(fileId) {
-            if(!this.file.windowed){
+            if (!this.file.windowed) {
                 let doc = document.getElementById(fileId);
-            doc.style.width = "100vw";
-            doc.style.height = "100vh";
-            this.fullSize = true;
-            doc.style.left = "0px";
-            doc.style.top = "0px";
+                doc.style.width = "100vw";
+                doc.style.height = "100vh";
+                this.fullSize = true;
+                doc.style.left = "0px";
+                doc.style.top = "0px";
             }
         },
         smallSizeWindow(fileId) {
@@ -85,7 +86,7 @@ export default {
             doc.style.top = "200px";
             this.fullSize = false;
         },
-        closeWindow(fileId){
+        closeWindow(fileId) {
             let doc = document.getElementById(fileId);
             doc.style.width = "700px";
             doc.style.height = "700px";
@@ -96,9 +97,13 @@ export default {
             "files"
         ])
     },
+    mounted() {
+
+    }
 
 }
 </script>
+
 
 <style scoped>
 .folder-header {
@@ -115,6 +120,8 @@ export default {
 .folder-body {
     display: flex;
     height: -webkit-fill-available;
+    flex-wrap: wrap;
+    align-content: flex-start;
     position: absolute;
     width: 100%;
     flex-direction: row;
@@ -125,9 +132,11 @@ export default {
     align-items: center;
     margin-left: 10px;
 }
-.app-controlls-item.x:hover{
+
+.app-controlls-item.x:hover {
     background-color: rgb(238, 93, 93);
 }
+
 .app-controlls-item {
     padding: 8px 26px;
 }
@@ -150,7 +159,7 @@ export default {
     border: 1px solid lightgray;
     top: 150px;
     left: 400px;
-   
+
     position: fixed;
     -webkit-user-select: none;
     -moz-user-select: none;

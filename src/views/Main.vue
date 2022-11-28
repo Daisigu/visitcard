@@ -38,7 +38,6 @@ export default {
         ...mapActions([
             'setFilesUnactive',
             'fileActive',
-            'openFile'
         ]),
 
 
