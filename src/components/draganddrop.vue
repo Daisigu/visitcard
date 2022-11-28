@@ -1,5 +1,5 @@
 <template>
-    <div @mousedown.prevent="drag(file.id)" @mousemove="draging(file.id)" @mouseup="drop()">
+    <div @mousedown.prevent="drag()" @mousemove="draging($event)" @mouseup="drop()">
         <slot></slot>
     </div>
 </template>
@@ -19,38 +19,32 @@ export default {
         drag() {
             this.dragUp = true;
         },
-        upZindex(fileId) {
-            let doc = document.getElementById(fileId);
+        upZindex() {
+            let doc = document.getElementById(this.file.id);
             let folders = document.getElementsByClassName("folder");
             for (let item of folders) {
                 item.style.zIndex = 1;
             }
             doc.style.zIndex = 999;
         },
-        draging(fileId) {
+        draging(e) {
             if (this.dragUp) {
-                let doc = document.getElementById(fileId);
+                let doc = document.getElementById(this.file.id);
                 doc.style.position = "fixed";
-                doc.style.left = event.clientX - 250 + "px";
-                doc.style.width = "700px";
-                doc.style.height = "700px";
-                doc.style.top = event.clientY - 20 + "px";
-                doc.style.transition = "none";
-                this.upZindex(fileId);
+                doc.style.left = e.clientX - 250 + "px";
+                doc.classList.remove('fullSizeWindow')
+                doc.style.top = e.clientY - 20 + "px";
+                this.upZindex(this.file.id);
                this.$parent.fullSize=false;
             }
         },
         drop() {
             this.dragUp = false;
-            let folders = document.getElementsByClassName("folder");
-            for (let item of folders) {
-                item.style.transition = "all 0.3s ease";
-            }
         },
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style  scoped>
 
 </style>

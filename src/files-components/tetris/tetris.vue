@@ -325,9 +325,12 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
     justify-content: center;
+    width: 100%;
+    height: 100%;
+   
 }
+
 .tetris-reset{
     position: absolute;
     right: 35px;
@@ -357,6 +360,8 @@ export default {
 }
 canvas {
     border: 1px solid white;
+    width: 100%;
+    height: 100%;
 }
 @keyframes fsz {
     0% {

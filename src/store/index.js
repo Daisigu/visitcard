@@ -6,7 +6,7 @@ export default createStore({
       {
         title: "background.exe",
         active: false,
-        src: require('@/assets/project.svg'),
+        src: require('@/assets/dall-e.png'),
         open: false,
         id: Date.now() * Math.random(),
         component: 'dall-e'

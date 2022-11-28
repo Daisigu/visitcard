@@ -1,8 +1,6 @@
 <template>
     <Teleport to="body">
         <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
-
-        
             @click.self="setFilesUnactive()">
             <Draganddrop :file="file">
                 <div class="folder-header" @dblclick="fullSizeWindow(file.id)">
@@ -18,13 +16,13 @@
                                 <i class="bi bi-window-stack"></i>
                             </span>
                         </div>
-                        <span class="app-controlls-item x" @click="closeWindow(file.id); file.open = false">
+                        <span class="app-controlls-item x" @click="closeWindow(file.id);">
                             <i class="bi bi-x-lg"></i>
                         </span>
                     </div>
                 </div>
             </Draganddrop>
-            <div class="folder-body">
+            <div class="folder-body" @click.self="setFilesUnactive()">
                 <slot></slot>
                 <component :is="file.component"></component>
             </div>
@@ -60,36 +58,28 @@ export default {
             "setFilesUnactive"
         ]),
 
-        upZindex(fileId) {
-            let doc = document.getElementById(fileId);
+        upZindex() {
+            let doc = document.getElementById(this.file.id);
             let folders = document.getElementsByClassName("folder");
             for (let item of folders) {
                 item.style.zIndex = 1;
             }
             doc.style.zIndex = 999;
         },
-        fullSizeWindow(fileId) {
+        fullSizeWindow() {
             if (!this.file.windowed) {
-                let doc = document.getElementById(fileId);
-                doc.style.width = "100vw";
-                doc.style.height = "100vh";
+                let doc = document.getElementById(this.file.id);
                 this.fullSize = true;
-                doc.style.left = "0px";
-                doc.style.top = "0px";
+                doc.classList.add('fullSizeWindow')
             }
         },
-        smallSizeWindow(fileId) {
-            let doc = document.getElementById(fileId);
-            doc.style.width = "700px";
-            doc.style.height = "700px";
-            doc.style.left = "200px";
-            doc.style.top = "200px";
+        smallSizeWindow() {
+            let doc = document.getElementById(this.file.id);
+            doc.classList.remove('fullSizeWindow')
             this.fullSize = false;
         },
-        closeWindow(fileId) {
-            let doc = document.getElementById(fileId);
-            doc.style.width = "700px";
-            doc.style.height = "700px";
+        closeWindow() {
+            this.file.open = false;
         }
     },
     computed: {
@@ -117,13 +107,22 @@ export default {
 
 }
 
+.fullSizeWindow {
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    left: 0 !important;
+}
+
 .folder-body {
     display: flex;
-    height: -webkit-fill-available;
+    height: 100%;
     flex-wrap: wrap;
     align-content: flex-start;
     position: absolute;
     width: 100%;
+    padding-bottom: 2rem;
+    overflow: auto;
     flex-direction: row;
 }
 
@@ -150,15 +149,21 @@ export default {
     display: flex;
     align-items: center;
 }
-
+.folder:has(.tetris){
+    width: 800px;
+    height: 770px;
+    resize: none;
+}
 .folder {
-    min-width: 700px;
-    min-height: 700px;
+    min-width: 500px;
+    min-height: 500px;
     max-width: 100%;
     max-height: 100%;
     border: 1px solid lightgray;
     top: 150px;
     left: 400px;
+    overflow: hidden;
+    resize: auto;
 
     position: fixed;
     -webkit-user-select: none;
@@ -167,14 +172,11 @@ export default {
     user-select: none;
     background-color: white;
     z-index: 999999;
-    transition: all 0.3s ease;
 }
 
 .hide {
     z-index: -999;
-    bottom: -2700px !important;
-    left: -2700px !important;
-    transform: translate(-542px, 518px);
+    transform: translate(-642px, 818px);
     transition: all 0.5s ease;
     opacity: 0;
 }

@@ -63,5 +63,6 @@ export default {
 .about-me {
     overflow: auto;
     padding: 1rem;
+    height: inherit;
 }
 </style>

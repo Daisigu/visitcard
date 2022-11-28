@@ -42,9 +42,11 @@ export default {
     margin-left: 20px;
     height: 100px;
 }
-.file-container:has(.file.active){
-    z-index: 9999;
+
+.file-container:has(.file.active) {
+    z-index: 2;
 }
+
 .file {
     cursor: pointer;
     background-position: 50%;
