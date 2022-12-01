@@ -3,7 +3,7 @@
         <Spinner :fullscreen="true" :show="loading"></Spinner>
 
         <h1 class="dall-e-title">Generate your background </h1>
-        <textarea placeholder="Type anything..." class="dall-e-textarea" type="text" v-model="promptValue">
+        <textarea placeholder="Type anything..." class="dall-e-textarea" type="text" v-model.trim="promptValue">
         </textarea>
         <div>
             <button :disabled="!promptValue" class="dall-e-button" @click="generateImage()">Set background</button>
@@ -30,25 +30,31 @@ export default {
     },
     methods: {
         async generateImage() {
-            this.loading = true
-           try {
-            const res = await openai.createImage({
-                prompt: this.promptValue,
-                n: 1,
-                size: "1024x1024",
-            });
-            this.loading = false
-            this.imageUrl = res.data.data[0].url;
-            document.body.style.backgroundImage = "url(" + this.imageUrl + ")";
-            document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundSize = "100% 100%";
-            this.promptValue = "";
-           }
-           catch(e){
-            alert('Invalid request, try something else');
-            this.loading=false
-            this.promptValue=''
-           }
+            if (this.promptValue.length > 0) {
+                this.loading = true
+                try {
+                    const res = await openai.createImage({
+                        prompt: this.promptValue,
+                        n: 1,
+                        size: "1024x1024",
+                    });
+
+                    this.imageUrl = res.data.data[0].url;
+                    document.body.style.backgroundImage = "url(" + this.imageUrl + ")";
+                    document.body.style.backgroundPosition = "center";
+                    document.body.style.backgroundSize = "100% 100%";
+                    this.promptValue = "";
+                    this.loading = false
+                }
+                catch (e) {
+                    alert('Invalid request, try something else');
+                    this.loading = false
+                    this.promptValue = ''
+                }
+            }
+            else {
+                alert('He said to type something, jesus christ...')
+            }
         },
         resetBackground() {
             document.body.style.backgroundImage = "";

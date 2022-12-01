@@ -1,5 +1,5 @@
 <template>
-    <div class="file-container" @dblclick="openFile([file.id, arr])" @click="fileActive([file.id, arr])">
+    <div class="file-container" @dblclick="openFile({fileId: file.id, arr})" @click="fileActive({fileId: file.id, arr})">
         <div class="file-wrapper">
             <div class="file" :class="{ 'active': file.active }"
                 :style="'background-image: url(' + file.src + '); background-size: 70px'">

@@ -6,107 +6,106 @@ export default createStore({
       {
         title: "background.exe",
         active: false,
-        src: require('@/assets/dall-e.png'),
+        src: require("@/assets/dall-e.png"),
         open: false,
         id: Date.now() * Math.random(),
-        component: 'dall-e'
+        component: "dall-e",
       },
       {
         title: "My projects",
         active: false,
-        src: require('@/assets/project.svg'),
+        src: require("@/assets/project.svg"),
         open: false,
         id: Date.now() * Math.random(),
         filesArray: [
-          
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
           {
             title: "MyProjectV2.docx",
             active: false,
-            src: require('@/assets/project.svg'),
+            src: require("@/assets/project.svg"),
             open: false,
             id: Date.now() * Math.random(),
           },
@@ -115,59 +114,50 @@ export default createStore({
       {
         title: "chat.exe",
         active: false,
-        src: require('@/assets/chat.svg'),
+        src: require("@/assets/chat.svg"),
         open: false,
         id: Date.now() * Math.random(),
-        component: 'chat'
+        component: "chat",
       },
       {
         title: "aboutMe.docx",
         active: false,
-        src: require('@/assets/portfolio.svg'),
+        src: require("@/assets/portfolio.svg"),
         open: false,
         id: Date.now() * Math.random(),
-        component: 'about-me'
+        component: "about-me",
       },
       {
         title: "tetris.exe",
         active: false,
-        src: require('@/assets/tetris.svg'),
+        src: require("@/assets/tetris.svg"),
         open: false,
         id: Date.now() * Math.random(),
-        component: 'tetris',
+        component: "tetris",
         windowed: true,
       },
-      
     ],
   },
   getters: {},
   mutations: {
-    setFilesInactive(state) {
+    setFilesInactive(state) { //set all files  inactive
       state.files.forEach((item) => {
         item.active = false;
         item.filesArray
-          ? item.filesArray.forEach((i) => (i.active = false))
+          ? item.filesArray.forEach((file) => (file.active = false))
           : 0;
       });
     },
-  },
-  actions: {
-    setFilesInactive({ commit, state }) {
-      commit("setFilesInactive");
-    },
-    fileActive({ commit, state }, args) {
-      const fileId = args[0];
-      const arr = args[1];
-      state.files.forEach((i) => {
-        i.active = false;
-        i.filesArray ? i.filesArray.forEach((i) => (i.active = false)) : 0;
+    fileActive(state, { fileId, arr }) { //set picked file active and all others files inactive
+      state.files.forEach((file) => {
+        file.active = false;
+        file.filesArray
+          ? file.filesArray.forEach((file) => (file.active = false))
+          : 0;
       });
-      const el = arr.find((el) => el.id == fileId);
-      el.active = true;
+      arr.find((el) => el.id == fileId).active = true;
     },
-    openFile({ commit, state }, args) {
-      const fileId = args[0];
-      const arr = args[1];
+    openFile(state, { fileId, arr }) { //set picked file open
       let doc = document.getElementById(fileId);
       const found = arr.find((element) => element.id == fileId);
       found.open = true;
@@ -178,5 +168,15 @@ export default createStore({
       doc.style.zIndex = 999;
     },
   },
-  modules: {},
+  actions: {
+    setFilesInactive({ commit }) {
+      commit("setFilesInactive");
+    },
+    fileActive({ commit, state }, { fileId, arr }) {
+      commit("fileActive", { fileId, arr });
+    },
+    openFile({ commit }, { fileId, arr }) {
+      commit("openFile", { fileId, arr });
+    },
+  },
 });

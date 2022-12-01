@@ -37,7 +37,6 @@ export default {
     methods: {
         ...mapActions([
             'setFilesInactive',
-            'fileActive',
         ]),
 
 
