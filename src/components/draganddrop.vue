@@ -1,6 +1,8 @@
 <template>
-    <div @mousedown.prevent="drag()" @mousemove="draging($event)" @mouseup="drop()">
-        <slot></slot>
+    <div @mousedown.prevent="drag()" @mousemove="dragging($event)" @mouseup="drop()">
+        <slot>
+        
+        </slot>
     </div>
 </template>
 
@@ -19,7 +21,7 @@ export default {
         drag() {
             this.dragUp = true;
         },
-        upZindex() {
+        upZIndex() {
             let doc = document.getElementById(this.file.id);
             let folders = document.getElementsByClassName("folder");
             for (let item of folders) {
@@ -27,14 +29,14 @@ export default {
             }
             doc.style.zIndex = 999;
         },
-        draging(e) {
+        dragging(e) {
             if (this.dragUp) {
                 let doc = document.getElementById(this.file.id);
                 doc.style.position = "fixed";
                 doc.style.left = e.clientX - 250 + "px";
                 doc.classList.remove('fullSizeWindow')
                 doc.style.top = e.clientY - 20 + "px";
-                this.upZindex(this.file.id);
+                this.upZIndex(this.file.id);
                this.$parent.fullSize=false;
             }
         },

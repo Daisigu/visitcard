@@ -1,6 +1,6 @@
 <template>
     <div class="main">
-        <FileContainer :direction="'column'" @click.self="setFilesUnactive()">
+        <FileContainer :direction="'column'" @click.self="setFilesInactive()">
             <File v-for="file in files" :key="file.id" :file="file" :arr="files">
                 <template v-slot:title>
                     {{ file.title }}
@@ -36,7 +36,7 @@ export default {
     components: { File, FileContainer, OpenFile, Spinner },
     methods: {
         ...mapActions([
-            'setFilesUnactive',
+            'setFilesInactive',
             'fileActive',
         ]),
 

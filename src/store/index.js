@@ -121,7 +121,7 @@ export default createStore({
         component: 'chat'
       },
       {
-        title: "aboutme.docx",
+        title: "aboutMe.docx",
         active: false,
         src: require('@/assets/portfolio.svg'),
         open: false,
@@ -142,7 +142,7 @@ export default createStore({
   },
   getters: {},
   mutations: {
-    setFilesUnactive(state) {
+    setFilesInactive(state) {
       state.files.forEach((item) => {
         item.active = false;
         item.filesArray
@@ -152,8 +152,8 @@ export default createStore({
     },
   },
   actions: {
-    setFilesUnactive({ commit, state }) {
-      commit("setFilesUnactive");
+    setFilesInactive({ commit, state }) {
+      commit("setFilesInactive");
     },
     fileActive({ commit, state }, args) {
       const fileId = args[0];

@@ -1,5 +1,5 @@
 <template>
-  <div class="app" @click.self="setFilesUnactive()">
+  <div class="app" @click.self="setFilesInactive()">
     <Loading></Loading>
     <Main></Main>
   </div>
@@ -13,7 +13,7 @@ import Loading from '@/components/loading.vue';
 export default {
   methods: {
     ...mapActions([
-    'setFilesUnactive'
+    'setFilesInactive'
   ])
   },
   components: { Main , Loading}

@@ -1,28 +1,28 @@
 <template>
     <Teleport to="body">
-        <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZindex(file.id)"
-            @click.self="setFilesUnactive()">
-            <Draganddrop :file="file">
+        <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZIndex(file.id)"
+            @click.self="setFilesInactive()">
+            <drag-and-drop :file="file">
                 <div class="folder-header" @dblclick="fullSizeWindow(file.id)">
-                    <div class="filder-header__title">
+                    <div class="folder-header__title">
                         <span>{{ file.title }}</span>
                     </div>
-                    <div class="folder-header__app-controlls">
+                    <div class="folder-header__app-controls">
                         <div v-if="!file.windowed">
-                            <span v-if="!fullSize" class="app-controlls-item" @click="fullSizeWindow(file.id)">
+                            <span v-if="!fullSize" class="app-controls-item" @click="fullSizeWindow(file.id)">
                                 <i class="bi bi-square"></i>
                             </span>
-                            <span class="app-controlls-item" v-else @click="smallSizeWindow(file.id)">
+                            <span class="app-controls-item" v-else @click="smallSizeWindow(file.id)">
                                 <i class="bi bi-window-stack"></i>
                             </span>
                         </div>
-                        <span class="app-controlls-item x" @click="closeWindow(file.id);">
+                        <span class="app-controls-item x" @click="closeWindow(file.id);">
                             <i class="bi bi-x-lg"></i>
                         </span>
                     </div>
                 </div>
-            </Draganddrop>
-            <div class="folder-body" @click.self="setFilesUnactive()">
+            </drag-and-drop>
+            <div class="folder-body" @click.self="setFilesInactive()">
                 <slot></slot>
                 <component :is="file.component"></component>
             </div>
@@ -40,11 +40,11 @@ import AboutMe from '@/files-components/AboutMe/about-me.vue'
 import Tetris from '@/files-components/tetris/tetris.vue'
 import Chat from '@/files-components/Chat/chat.vue';
 import DallE from '@/files-components/Dall-e/dall-e.vue';
-import Draganddrop from './draganddrop.vue';
+import DragAndDrop from './DragAndDrop.vue';
 import File from './File.vue';
 import FileContainer from './FileContainer.vue';
 export default {
-    components: { File, FileContainer, Draganddrop, DallE, Chat, AboutMe, Tetris },
+    components: { File, FileContainer, DragAndDrop, DallE, Chat, AboutMe, Tetris },
     props: {
         file: Object,
     },
@@ -55,10 +55,10 @@ export default {
     },
     methods: {
         ...mapActions([
-            "setFilesUnactive"
+            "setFilesInactive"
         ]),
 
-        upZindex() {
+        upZIndex() {
             let doc = document.getElementById(this.file.id);
             let folders = document.getElementsByClassName("folder");
             for (let item of folders) {
@@ -126,34 +126,36 @@ export default {
     flex-direction: row;
 }
 
-.filder-header__title {
+.folder-header__title {
     display: flex;
     align-items: center;
     margin-left: 10px;
 }
 
-.app-controlls-item.x:hover {
+.app-controls-item.x:hover {
     background-color: rgb(238, 93, 93);
 }
 
-.app-controlls-item {
+.app-controls-item {
     padding: 8px 26px;
 }
 
-.app-controlls-item:hover {
+.app-controls-item:hover {
     transition: all 0.2s ease;
     background-color: #5cd0f7;
 }
 
-.folder-header__app-controlls {
+.folder-header__app-controls {
     display: flex;
     align-items: center;
 }
-.folder:has(.tetris){
+
+.folder:has(.tetris) {
     width: 800px;
     height: 770px;
     resize: none;
 }
+
 .folder {
     min-width: 500px;
     min-height: 500px;
