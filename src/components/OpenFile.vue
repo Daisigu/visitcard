@@ -1,6 +1,6 @@
 <template>
     <Teleport to="body">
-        <div class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZIndex(file.id)"
+        <div  class="folder" :class="{ hide: !file.open }" :id="file.id" @click.stop="upZIndex(file.id)"
             @click.self="setFilesInactive()">
             <drag-and-drop :file="file">
                 <div class="folder-header" @dblclick="fullSizeWindow(file.id)">
