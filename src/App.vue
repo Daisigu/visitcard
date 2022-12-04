@@ -29,6 +29,7 @@ export default {
   padding: 0;
   box-sizing: border-box;
   list-style: none;
+  font-family: 'Nova', monospace;
 }
 
 body {
@@ -36,7 +37,6 @@ body {
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  font-family: 'Nova', monospace;
 }
 
 #app {
