@@ -1,15 +1,17 @@
 <template>
     <div class="chat">
-        <div class="empty-messages" v-if="messages.length==0">
+        <div class="empty-messages" v-if="messages.length == 0">
             <h1>Type something to get response</h1>
         </div>
         <div v-else class="messages scrollGray" ref="messagesEl">
-            <div v-for="message in messages" class="message-bubble" :key="message.id"
-                :class="[{ 'message-text-left': message.label == 'left' }, { 'message-text-right': message.label == 'right' }]">
-                <div class="message-text">
-                    {{ message.message }}
+            <transition-group name="list">
+                <div v-for="message in messages" class="message-bubble" :key="message.id"
+                    :class="[{ 'message-text-left': message.label == 'left' }, { 'message-text-right': message.label == 'right' }]">
+                    <div class="message-text">
+                        {{ message.message }}
+                    </div>
                 </div>
-            </div>
+            </transition-group>
             <div class="typing message-text-left" v-if="loading">
                 <div class="dot"></div>
                 <div class="dot"></div>
@@ -48,9 +50,7 @@ export default {
                         message: query,
                         id: Date.now() * Math.random()
                     })
-                    setTimeout(() => {
                         this.scrollDown();
-                    }, 50)
                     this.loading = true;
                     this.messageQuery = '';
                     const res = await axios({
@@ -72,6 +72,7 @@ export default {
                         id: Date.now() * Math.random()
                     })
                     this.loading = false;
+                    this.scrollDown()
                 }
 
             } catch (e) {
@@ -80,9 +81,11 @@ export default {
             }
         },
         scrollDown() {
-            const el = this.$refs.messagesEl
-            console.log(el);
-            el.scroll({ top: el.scrollHeight, behavior: "smooth" })
+            setTimeout(() => {
+                const el = this.$refs.messagesEl
+                console.log(el);
+                el.scroll({ top: el.scrollHeight, behavior: "smooth" })
+            })
         }
     },
 }
@@ -159,6 +162,7 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: auto;
+    overflow-x: hidden;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     padding-right: 1rem
@@ -264,5 +268,16 @@ export default {
     border-radius: 15px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
     background: white;
+}
+
+.list-enter-active,
+.list-leave-active {
+    transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    transform: translateX(30px);
 }
 </style>
