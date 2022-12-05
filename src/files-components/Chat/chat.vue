@@ -50,7 +50,7 @@ export default {
                         message: query,
                         id: Date.now() * Math.random()
                     })
-                        this.scrollDown();
+                    this.scrollDown();
                     this.loading = true;
                     this.messageQuery = '';
                     const res = await axios({

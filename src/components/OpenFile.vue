@@ -40,9 +40,9 @@ import AboutMe from '@/files-components/AboutMe/about-me.vue'
 import Tetris from '@/files-components/tetris/tetris.vue'
 import Chat from '@/files-components/Chat/chat.vue';
 import DallE from '@/files-components/Dall-e/dall-e.vue';
-import DragAndDrop from './DragAndDrop.vue';
-import File from './File.vue';
-import FileContainer from './FileContainer.vue';
+import DragAndDrop from '@/components/DragAndDrop.vue';
+import File from '@/components/File.vue';
+import FileContainer from '@/components/FileContainer.vue';
 export default {
     components: { File, FileContainer, DragAndDrop, DallE, Chat, AboutMe, Tetris },
     props: {
