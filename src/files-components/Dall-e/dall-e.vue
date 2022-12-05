@@ -17,7 +17,7 @@ import { Configuration, OpenAIApi } from "openai";
 import Spinner from "@/components/UI-elements/spinner.vue";
 
 const configuration = new Configuration({
-    apiKey: process.env.VUE_APP_NOT_SECRET_CODE,
+    apiKey: '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',
 });
 const openai = new OpenAIApi(configuration);
 export default {
