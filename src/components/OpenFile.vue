@@ -40,7 +40,7 @@ import AboutMe from '@/files-components/AboutMe/about-me.vue'
 import Tetris from '@/files-components/tetris/tetris.vue'
 import Chat from '@/files-components/Chat/chat.vue';
 import DallE from '@/files-components/Dall-e/dall-e.vue';
-import DragAndDrop from '@/components/DragAndDrop.vue';
+import DragAndDrop from './draganddrop.vue';
 import File from '@/components/File.vue';
 import FileContainer from '@/components/FileContainer.vue';
 export default {
