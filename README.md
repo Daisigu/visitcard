@@ -1,5 +1,6 @@
 # visitcard
 
+ Netify: https://chipper-starlight-28812c.netlify.app/
 ## Project setup
 ```
 npm install
